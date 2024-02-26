@@ -25,6 +25,10 @@ public static class ArraysTester {
         numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
         RotateListRight(numbers, 9);
         Console.WriteLine($"<List>{{{string.Join(',', numbers)}}}"); // <List>{1, 2, 3, 4, 5, 6, 7, 8, 9}
+        //This is an extra test where I verify what would happen if the amount is greater than the length of the list
+        numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        RotateListRight(numbers, 14);
+        Console.WriteLine($"<List>{{{string.Join(',', numbers)}}}"); // <List>{5, 6, 7, 8, 9, 1, 2, 3, 4}
     }
     /// <summary>
     /// This function will produce a list of size 'length' starting with 'number' followed by multiples of 'number'.  For 
@@ -39,7 +43,14 @@ public static class ArraysTester {
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return new double[0]; // replace this return statement with your own
+        double[] result = new double[length];
+        int i = 0;
+        while (i < length)
+        {
+            result[i] = number * (++i);
+        }
+
+        return result;
     }
     
     /// <summary>
@@ -57,5 +68,27 @@ public static class ArraysTester {
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
+        int length = data.Count;
+        int[] temp = new int[length];
+
+        while (amount > length)
+        {
+            amount -= length;
+        }
+
+        for (int i = 0; i < length; ++i)
+        {
+            temp[i] = data[i];
+        }
+
+        for (int i = amount; i < length; ++i)
+        {
+            data[i] = temp[i - amount];
+        }
+
+        for (int i = 0, j = length - amount; j < length; ++i, ++j)
+        {
+            data[i] = temp[j];
+        }
     }
 }

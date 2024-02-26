@@ -7,10 +7,50 @@ public static class ArraySelector
         var select = new[] { 1, 1, 1, 2, 2, 1, 2, 2, 2, 1};
         var intResult = ListSelector(l1, l2, select);
         Console.WriteLine("<int[]>{" + string.Join(", ", intResult) + "}"); // <int[]>{1, 2, 3, 2, 4, 4, 6, 8, 10, 5}
+
+        var l3 = new[] { 'A', 'A', 'A', 'A', 'A'};
+        var l4 = new[] { 'B', 'B', 'B', 'B', 'B'};
+        select = new[] { 1, 2, 1, 2, 1, 2, 1, 2, 1, 2};
+        var charResult = ListSelector(l3, l4, select);
+        Console.WriteLine("<char[]>{" + string.Join(", ", charResult) + "}"); // <char[]>{A, B, A, B, A, B, A, B, A, B}
     }
 
+    private static char[] ListSelector(char[] list1, char[] list2, int[] select)
+    {
+        int size = select.Length;
+        char[] result = new char[size];
+        for (int i = 0, i1 = 0, i2 = 0; i < size; ++i)
+        {
+            if (select[i] == 1)
+            {
+                result[i] = list1[i1];
+                ++i1;
+            }
+            else
+            {
+                result[i] = list2[i2];
+                ++i2;
+            }
+        }
+        return result;
+    }
     private static int[] ListSelector(int[] list1, int[] list2, int[] select)
     {
-        return new int[0];
+        int size = select.Length;
+        int[] result = new int[size];
+        for (int i = 0, i1 = 0, i2 = 0; i < size; ++i)
+        {
+            if (select[i] == 1)
+            {
+                result[i] = list1[i1];
+                ++i1;
+            }
+            else
+            {
+                result[i] = list2[i2];
+                ++i2;
+            }
+        }
+        return result;
     }
 }
