@@ -31,7 +31,7 @@ public static class ArraysTester {
         Console.WriteLine($"<List>{{{string.Join(',', numbers)}}}"); // <List>{5, 6, 7, 8, 9, 1, 2, 3, 4}
     }
     /// <summary>
-    /// This function will produce a list of size 'length' starting with 'number' followed by multiples of 'number'.  For 
+    /// This function will produce a list of size 'length' starting with 'number' followed by multiples of 'number'.  For
     /// example, MultiplesOf(7, 5) will result in: {7, 14, 21, 28, 35}.  Assume that length is a positive
     /// integer greater than 0.
     /// </summary>
@@ -43,6 +43,14 @@ public static class ArraysTester {
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
+        /*
+        Plan Steps:
+            1) Initialize an empty array to store the multiples.
+            2) Use a loop to iterate from 1 up to the number of multiples (length).
+            3) Calculate each multiple by multiplying the starting number by the loop index while saving each result in our array.
+            4) Return the array of multiples.
+        */
+
         double[] result = new double[length];
         int i = 0;
         while (i < length)
@@ -52,7 +60,7 @@ public static class ArraysTester {
 
         return result;
     }
-    
+
     /// <summary>
     /// Rotate the 'data' to the right by the 'amount'.  For example, if the data is 
     /// <c>&lt;List&gt;{1, 2, 3, 4, 5, 6, 7, 8, 9}</c> and an amount is 3 then the list returned should be 
@@ -67,6 +75,16 @@ public static class ArraysTester {
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+        /*
+        Plan Steps:
+            1) Get the length of the data list using data.Count and store it in the variable length.
+            2) Create a new list (or array) to store the original data.
+            3) Use a loop to ensure that the amount is within the range of the length of the data list. If the amount is greater than the length of the data list, reduce the amount by subtracting the length from it until it is within the valid range.
+            4) Copy the elements of the data list to the temp array using a loop.
+            5) Use another loop to iterate through the data list starting from the index specified by the amount. Assign the elements from the temp array to the data list at index i - amount (in the first iteration, i - amount is going to be the 0 index, so we are putting the first elements in our temp at the "amount" position in our original list).
+            6) Use another loop to iterate from index 0 to length - amount in the data list and assign the corresponding elements from the temp array to the data list (we put in our original list the remaining elements and then completing the rotation).
+        */
 
         int length = data.Count;
         int[] temp = new int[length];
