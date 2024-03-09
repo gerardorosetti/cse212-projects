@@ -36,7 +36,7 @@
             Console.WriteLine($"{priorityQueue.Dequeue()}");
         }
 
-        // Defect(s) Found: the _queue was not removing the element
+        // Defect(s) Found: the Dequeue method was not removing from _queuethe element.
 
         Console.WriteLine("---------");
 
@@ -69,7 +69,7 @@
         priorityQueue = new PriorityQueue();
         Console.WriteLine($"{priorityQueue.Dequeue()}");
 
-        // Defect(s) Found: the for was taking the last person in the queue not the firts (was not following the FIFO strategy), and it was not considering the last element in the queue.
+        // Defect(s) Found: no errors found.
 
         Console.WriteLine("---------");
     }
