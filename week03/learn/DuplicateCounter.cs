@@ -25,6 +25,19 @@
     private static int CountDuplicates(int[] data)
     {
         // Add code here.
-        return 0;
+        HashSet<int> set = new HashSet<int>();
+        int counter = 0;
+        foreach (var item in data)
+        {
+            if (set.Contains(item))
+            {
+                ++counter;
+            }
+            else
+            {
+                set.Add(item);
+            }
+        }
+        return counter;
     }
 }
