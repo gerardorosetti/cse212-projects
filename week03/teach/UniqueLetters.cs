@@ -1,4 +1,6 @@
-﻿public static class UniqueLetters {
+﻿using System.Dynamic;
+
+public static class UniqueLetters {
     public static void Run() {
         var test1 = "abcdefghjiklmnopqrstuvwxyz"; // Expect True because all letters unique
         Console.WriteLine(AreUniqueLetters(test1));
@@ -23,6 +25,7 @@
             }
         }
 
+        //return set.Count - text.Length == 0;
         return true;
     }
 }
