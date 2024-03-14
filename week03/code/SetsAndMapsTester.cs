@@ -111,6 +111,15 @@ public static class SetsAndMapsTester {
         // To display the pair correctly use something like:
         // Console.WriteLine($"{word} & {pair}");
         // Each pair of words should displayed on its own line.
+        HashSet<string> set = new HashSet<string>();
+        foreach (string word in words)
+        {
+            if (word[0] != word[1] && set.Contains($"{word[1]}{word[0]}"))
+            {
+                Console.WriteLine($"{word} & {word[1]}{word[0]}");
+            }
+            set.Add(word);
+        }
     }
 
     /// <summary>
@@ -132,8 +141,16 @@ public static class SetsAndMapsTester {
         foreach (var line in File.ReadLines(filename)) {
             var fields = line.Split(",");
             // Todo Problem 2 - ADD YOUR CODE HERE
+            string degree = fields[3];
+            if(degrees.ContainsKey(fields[3]))
+            {
+                ++degrees[degree];
+            }
+            else
+            {
+                degrees[degree] = 1;
+            }
         }
-
         return degrees;
     }
 
@@ -158,7 +175,39 @@ public static class SetsAndMapsTester {
     /// #############
     private static bool IsAnagram(string word1, string word2) {
         // Todo Problem 3 - ADD YOUR CODE HERE
-        return false;
+
+        string[] words = new string[2];
+        words[0] = word1.ToLower().Replace(" ", "");
+        words[1] = word2.ToLower().Replace(" ", "");
+        Dictionary<char, int>[] dictionaries = new Dictionary<char, int>[2];
+        dictionaries[0] = new Dictionary<char, int>();
+        dictionaries[1] = new Dictionary<char, int>();
+        for (int i = 0; i < 2; i++)
+        {
+            foreach (char letter in words[i])
+            {
+                if(dictionaries[i].ContainsKey(letter))
+                {
+                    ++dictionaries[i][letter];
+                }
+                else
+                {
+                    dictionaries[i][letter] = 1;
+                }
+            }
+        }
+        foreach (KeyValuePair<char, int> item in dictionaries[0])
+        {
+            if(dictionaries[1].ContainsKey(item.Key))
+            {
+                if (dictionaries[0][item.Key] != dictionaries[1][item.Key]) return false;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     /// <summary>
