@@ -270,11 +270,39 @@ public static class SetsAndMapsTester {
     /// 
     /// </summary>
     private static void EarthquakeDailySummary() {
+        try 
+        {
+            const string uri = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
+            using var client = new HttpClient();
+            using var getRequestMessage = new HttpRequestMessage(HttpMethod.Get, uri);
+            using var jsonStream = client.Send(getRequestMessage).Content.ReadAsStream();
+            using var reader = new StreamReader(jsonStream);
+
+            var json = reader.ReadToEnd();
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+
+            var featureCollection = JsonSerializer.Deserialize<FeatureCollection>(json, options);
+
+            // TODO:
+            // 1. Add code in FeatureCollection.cs to describe the JSON using classes and properties 
+            // on those classes so that the call to Deserialize above works properly.
+            // 2. Add code below to print out each place a earthquake has happened today and its magitude.
+            foreach (var feature in featureCollection.Features)
+            {
+                Console.WriteLine($"{feature.properties.place} - Mag {feature.properties.mag}");
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Failure to receive earthquake data:\nExcepton: {e}\n");
+        }
+        /*
         const string uri = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
         using var client = new HttpClient();
         using var getRequestMessage = new HttpRequestMessage(HttpMethod.Get, uri);
         using var jsonStream = client.Send(getRequestMessage).Content.ReadAsStream();
         using var reader = new StreamReader(jsonStream);
+        
         var json = reader.ReadToEnd();
         var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
@@ -284,5 +312,9 @@ public static class SetsAndMapsTester {
         // 1. Add code in FeatureCollection.cs to describe the JSON using classes and properties 
         // on those classes so that the call to Deserialize above works properly.
         // 2. Add code below to print out each place a earthquake has happened today and its magitude.
+        foreach (var feature in featureCollection.Features)
+        {
+            Console.WriteLine($"{feature.properties.place} - Mag {feature.properties.mag}");
+        }*/
     }
 }

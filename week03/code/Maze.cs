@@ -28,8 +28,41 @@ public class Maze {
     /// Check to see if you can move left.  If you can, then move.  If you
     /// can't move, then display "Can't go that way!"
     /// </summary>
+    private void Move(int index)
+    {
+        ValueTuple<int, int> current_point = (_currX, _currY);
+        if(_mazeMap[current_point][index])
+        {
+            Console.Write($"Moved from: {current_point}");
+            switch (index)
+            {
+                case 0: 
+                    _currX -= 1;
+                    break;
+                case 1: 
+                    _currX += 1;
+                    break;
+                case 2: 
+                    _currY -= 1;
+                    break;
+                case 3: 
+                    _currY += 1;
+                    break;
+                default:
+                    break;
+            }
+            ValueTuple<int, int> new_point = (_currX, _currY);
+            Console.WriteLine($" to: {new_point}");
+        }
+        else
+        {
+            Console.WriteLine("Can't go that way!");
+        }
+    }
     public void MoveLeft() {
         // FILL IN CODE
+        Console.Write("Action: Move-Left: ");
+        Move(0);
     }
 
     /// <summary>
@@ -38,6 +71,8 @@ public class Maze {
     /// </summary>
     public void MoveRight() {
         // FILL IN CODE
+        Console.Write("Action: Move-Right: ");
+        Move(1);
     }
 
     /// <summary>
@@ -46,6 +81,8 @@ public class Maze {
     /// </summary>
     public void MoveUp() {
         // FILL IN CODE
+        Console.Write("Action: Move-Up: ");
+        Move(2);
     }
 
     /// <summary>
@@ -54,6 +91,8 @@ public class Maze {
     /// </summary>
     public void MoveDown() {
         // FILL IN CODE
+        Console.Write("Action: Move-Down: ");
+        Move(3);
     }
 
     public void ShowStatus() {
