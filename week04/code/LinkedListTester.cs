@@ -68,9 +68,16 @@ public static class LinkedListTester {
         Console.WriteLine(ll.ToString()); // <LinkedList>{4, 35, 10, 10}
         ll.Replace(4, 100);
         Console.WriteLine(ll.ToString()); // <LinkedList>{100, 35, 10, 10}
+        ll.Replace(10, 73); // extra
+        Console.WriteLine(ll.ToString()); // <LinkedList>{100, 35, 73, 73}
+        ll.Replace(73, 10); // extra
+        Console.WriteLine(ll.ToString()); // <LinkedList>{100, 35, 10, 10}
 
 
         Console.WriteLine("\n=========== PROBLEM 5 TESTS ===========");
         Console.WriteLine(ll.Reverse().AsString()); // <IEnumerable>[10, 10, 35, 100}
+        foreach(var item in ll.Reverse()) {
+            Console.WriteLine(item);
+        }
     }
 }
