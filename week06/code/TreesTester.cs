@@ -61,7 +61,7 @@ public static class TreesTester {
     /// Length-1 used.
     /// </summary>
     private static BinarySearchTree CreateTreeFromSortedList(int[] sortedNumbers) {
-        var bst = new BinarySearchTree(); // Create an empty BST to start with 
+        var bst = new BinarySearchTree(); // Create an empty BST to start with
         InsertMiddle(sortedNumbers, 0, sortedNumbers.Length - 1, bst);
         return bst;
     }
@@ -76,11 +76,11 @@ public static class TreesTester {
     /// first = 0;
     /// last = 5;
     /// </code>
-    /// then the value 30 (index 2 which is the middle) would be added 
+    /// then the value 30 (index 2 which is the middle) would be added
     /// to the 'bst' (the insert function in the <see cref="BinarySearchTree"/> can be used
-    /// to do this).   
+    /// to do this).
     ///
-    /// Subsequent recursive calls are made to insert the middle from the values 
+    /// Subsequent recursive calls are made to insert the middle from the values
     /// before 30 and the values after 30.  If done correctly, the order
     /// in which values are added (which results in a balanced bst) will be:
     /// <code>
@@ -88,15 +88,20 @@ public static class TreesTester {
     /// </code>
     /// This function is intended to be called the first time by CreateTreeFromSortedList.
     ///
-    /// The purpose for having the first and last parameters is so that we do 
-    /// not need to create new sub-lists when we make recursive calls.  Avoid 
-    /// using list slicing to create sub-lists to solve this problem.    
+    /// The purpose for having the first and last parameters is so that we do
+    /// not need to create new sub-lists when we make recursive calls.  Avoid
+    /// using list slicing to create sub-lists to solve this problem.
     /// </summary>
     /// <param name="sortedNumbers">input numbers that are already sorted</param>
     /// <param name="first">the first index in the sortedNumbers to insert</param>
     /// <param name="last">the last index in the sortedNumbers to insert</param>
     /// <param name="bst">the BinarySearchTree in which to insert the values</param>
     private static void InsertMiddle(int[] sortedNumbers, int first, int last, BinarySearchTree bst) {
-        // TODO Start Problem 5
+        if (first <= last) {
+            int middle = (first + last) / 2;
+            bst.Insert(sortedNumbers[middle]);
+            InsertMiddle(sortedNumbers, first, middle - 1, bst);
+            InsertMiddle(sortedNumbers, middle + 1, last, bst);
+        }
     }
 }
